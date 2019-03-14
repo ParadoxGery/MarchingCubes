@@ -9,8 +9,7 @@ ProjectSettings/
 .idea/
 Plugins/
 Logs/
-Assets/
-!Assets/Scripts/
+Assets/Scenes/
 *.meta
 manifest.json
 Assets/AssetStoreTools*
