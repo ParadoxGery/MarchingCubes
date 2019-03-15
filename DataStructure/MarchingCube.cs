@@ -6,7 +6,7 @@ namespace pxg.DataStructure
 {
     public class MarchingCube
     {
-        public MarchingCube(List<Vector3> p, Chunk chunk)
+        private MarchingCube(List<Vector3> p, Chunk chunk)
         {
             Points = p;
             Values = new List<float>(8);
@@ -16,20 +16,20 @@ namespace pxg.DataStructure
             }
         }
 
-        public List<Vector3> Points { get; set; }
+        public List<Vector3> Points { get; }
 
-        public List<float> Values { get; set; }
+        public List<float> Values { get; }
 
-        public static List<MarchingCube> generateCubes(int res, float dimension, Chunk chunk)
+        public static IEnumerable<MarchingCube> GenerateCubes(int res, Chunk chunk)
         {
             var cubes = new List<MarchingCube>();
 
-            var step = dimension / res;
-            for (var x = 0f; x < dimension; x += step)
+            var step = Math.Max(Math.Max(chunk.Dimension.x, chunk.Dimension.y), chunk.Dimension.z) / res;
+            for (var x = 0f; x < chunk.Dimension.x; x += step)
             {
-                for (var y = 0f; y < dimension; y += step)
+                for (var y = 0f; y < chunk.Dimension.y; y += step)
                 {
-                    for (var z = 0f; z < dimension; z += step)
+                    for (var z = 0f; z < chunk.Dimension.z; z += step)
                     {
                         var points = new List<Vector3>(8)
                         {

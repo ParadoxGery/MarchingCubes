@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace pxg.DataStructure
 {
-    public class EdgeToPoint
+    public static class EdgeToPoint
     {
-        public static List<int> getPointIndices(int edge)
+        public static List<int> GetPointIndices(int edge)
         {
             var l = new List<int>();
-            
+
             switch (edge)
             {
                 case 0:
