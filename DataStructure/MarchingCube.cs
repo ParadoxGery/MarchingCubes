@@ -33,14 +33,14 @@ namespace pxg.DataStructure
                     {
                         var points = new List<Vector3>(8)
                         {
+                            new Vector3(x, y, z + step),
+                            new Vector3(x + step, y, z + step),
+                            new Vector3(x + step, y + step, z + step),
+                            new Vector3(x, y + step, z + step),
                             new Vector3(x, y, z),
                             new Vector3(x + step, y, z),
-                            new Vector3(x, y + step, z),
-                            new Vector3(x, y, z + step),
                             new Vector3(x + step, y + step, z),
-                            new Vector3(x + step, y, z + step),
-                            new Vector3(x, y + step, z + step),
-                            new Vector3(x + step, y + step, z + step)
+                            new Vector3(x, y + step, z),
                         };
 
 
