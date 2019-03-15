@@ -6,10 +6,14 @@ namespace pxg.DataStructure
 {
     public class MarchingCube
     {
-        public MarchingCube(List<Vector3> p, List<float> v)
+        public MarchingCube(List<Vector3> p, Chunk chunk)
         {
             Points = p;
-            Values = v;
+            Values = new List<float>(8);
+            foreach (var point in p)
+            {
+                Values.Add(chunk.getValue(point.x, point.y, point.z));
+            }
         }
 
         public List<Vector3> Points { get; set; }
@@ -27,27 +31,20 @@ namespace pxg.DataStructure
                 {
                     for (var z = 0f; z < dimension; z += step)
                     {
-                        var points = new List<Vector3>();
-                        var values = new List<float>();
+                        var points = new List<Vector3>(8)
+                        {
+                            new Vector3(x, y, z),
+                            new Vector3(x + step, y, z),
+                            new Vector3(x, y + step, z),
+                            new Vector3(x, y, z + step),
+                            new Vector3(x + step, y + step, z),
+                            new Vector3(x + step, y, z + step),
+                            new Vector3(x, y + step, z + step),
+                            new Vector3(x + step, y + step, z + step)
+                        };
 
-                        points.Add(new Vector3(x, y, z));
-                        values.Add(chunk.getValue(x, y, z));
-                        points.Add(new Vector3(x + step, y, z));
-                        values.Add(chunk.getValue(x + step, y, z));
-                        points.Add(new Vector3(x, y + step, z));
-                        values.Add(chunk.getValue(x, y + step, z));
-                        points.Add(new Vector3(x, y, z + step));
-                        values.Add(chunk.getValue(x, y, z + step));
-                        points.Add(new Vector3(x + step, y + step, z));
-                        values.Add(chunk.getValue(x + step, y + step, z));
-                        points.Add(new Vector3(x + step, y, z + step));
-                        values.Add(chunk.getValue(x + step, y, z + step));
-                        points.Add(new Vector3(x, y + step, z + step));
-                        values.Add(chunk.getValue(x, y + step, z + step));
-                        points.Add(new Vector3(x + step, y + step, z + step));
-                        values.Add(chunk.getValue(x + step, y + step, z + step));
-                        
-                        cubes.Add(new MarchingCube(points, values));
+
+                        cubes.Add(new MarchingCube(points, chunk));
                     }
                 }
             }
