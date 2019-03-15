@@ -12,16 +12,16 @@ namespace pxg.DataStructure
             Vertices = new List<Vector3>();
             Triangles = new List<int>();
 
+            foreach (var cube in cubes)
+            {
+                CreateTriangle(cube.Points, cube.Values, tau);
+            }
+
             for (var i = 2; i < Vertices.Count; i += 3)
             {
                 Triangles.Add(i - 2);
                 Triangles.Add(i);
                 Triangles.Add(i - 1);
-            }
-
-            foreach (var cube in cubes)
-            {
-                CreateTriangle(cube.Points, cube.Values, tau);
             }
         }
 
