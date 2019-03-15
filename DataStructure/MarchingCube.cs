@@ -24,12 +24,12 @@ namespace pxg.DataStructure
         {
             var cubes = new List<MarchingCube>();
 
-            var step = Math.Max(Math.Max(chunk.Dimension.x, chunk.Dimension.y), chunk.Dimension.z) / res;
-            for (var x = 0f; x < chunk.Dimension.x; x += step)
+            var step = (int) Math.Max(Math.Max(chunk.Dimension.x, chunk.Dimension.y), chunk.Dimension.z) / res;
+            for (var x = 0f; x <= chunk.Dimension.x +1f; x += step)
             {
-                for (var y = 0f; y < chunk.Dimension.y; y += step)
+                for (var y = 0f; y <= chunk.Dimension.y +1f; y += step)
                 {
-                    for (var z = 0f; z < chunk.Dimension.z; z += step)
+                    for (var z = 0f; z <= chunk.Dimension.z +1f; z += step)
                     {
                         var points = new List<Vector3>(8)
                         {
